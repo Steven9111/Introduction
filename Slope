@@ -1,0 +1,18 @@
+clear('all')
+
+load('sierrademml.mat');
+dim = size(sierrademml);
+Z = sierrademml;
+
+res = 30;
+
+
+for i=2:dimx-1
+    for j =2:dimy-1
+    deltay = (Z(i+1,j)-Z(i-1,j))/(2.*res);
+    deltax = (Z(i,j+1)-Z(i,j-1))/(2.*res);
+    S(i,j) = ((deltax.^2)*(deltay.^2))^(1/2);
+    end
+end
+
+imagesc(S)
