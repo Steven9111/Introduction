@@ -1,0 +1,22 @@
+clearvars
+%% Everzwijnen + wolven
+% Gegevens
+r = 0.48;
+c = 0.01; % predation rate coefficient
+d = 0.24; % wolve mortality rate
+e = 0.005; % reproduction rate of wolves per boar eaten
+N(1) = [100]; % beginpopulatie everzwijnen
+W(1) = [25]; % beginpopulatie wolven
+dt = 0.05; %tijdsstap
+tijd = [1:dt:100];
+%alfa = 0.4 % voor jacht erbij
+
+% Model (for-loop)
+for t = [2:numel(tijd)]
+    %H = alfa .* N(t-1); %voor jacht erbij
+    dN = (r*N(t-1) - c*W(t-1)*N(t-1))*dt; % bij jacht: '-H' binnen haakjes erbij
+    N(t) = N(t-1) + dN;
+    dW = (-d*W(t-1) + e*W(t-1)*N(t-1))*dt;
+    W(t) = W(t-1) + dW;
+end
+plot(tijd,N,':k',tijd,W,'-r')
